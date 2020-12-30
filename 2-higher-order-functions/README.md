@@ -25,7 +25,9 @@ In order to complete these exercises, open [repl.it](https://repl.it/), choose J
    ```js
    function sumSquares(numbers) {
      var total = 0;
-     // ...
+     each(numbers, (num) => {
+       total += num;
+     })
      return total;
    }
    ```
@@ -35,8 +37,8 @@ In order to complete these exercises, open [repl.it](https://repl.it/), choose J
     ```js
     function sumCubes(numbers) {
       var total = 0;
-      for (var i = 0; i < numbers.length; i++) {
-        total = total + cube(numbers[i]);
+      each(numbers, (num) => {
+        total += cube(num);
       }
       return total;
     }
@@ -44,20 +46,50 @@ In order to complete these exercises, open [repl.it](https://repl.it/), choose J
 
 3.  Write a function called `product` that calculates the product of an array of
     numbers using a `for` loop; then, refactor it to use `each`.
+```js
+    const product = (numbers) => {
+      let result = 1;
+      each(numbers, (num) => result *= num);
+      return result;
+    };
+```
 
 4.  Write a function called `cubeAll` that cubes each number in an array, and
     returns an array of all the numbers *cubed* using a `for` loop; then,
     refactor it to use `each`.
-
+    ```js
+    const cubeAll = (numbers) => {
+      const result = new Array();
+      each(numbers, (num) => result.push(num * num * num));
+      return result;
+    }
+    ```
 5.  Write a function called `odds` that accepts an array as a parameter and
     returns an array of just the odd numbers.
-
+    ```js
+    const odds = (numbers) => {
+      const result = new Array();
+      each(numbers, num => {
+        if (num % 2 !== 0) {
+          result.push(num);
+        }
+      });
+      return result;
+    };
+    ```
 ### More Practice
 
 #### Summations
 
 1.  Write a function `sumByAllElementsMultipliedByFour` that takes an array as an
     argument and returns the sum of all elements multiplied by four.
+    ```js
+    const sumByAllElementsMultipliedByFour = (numbers) => {
+      const result = 0;
+      each(numbers, (num) => result += num);
+      return result * 4;
+    };
+    ```
 
 2.  Observe that `sumByAllElementsMultipliedByFour` is a terrible name for a
     function &#x2013; you should also notice that `sumByAllElementsMultipliedByFour`
@@ -68,9 +100,12 @@ In order to complete these exercises, open [repl.it](https://repl.it/), choose J
     and its result will be used to compute the sum.
 
     ```js
-    function sumBy(numbers, f) {
-      // ...
+    function sumBy(numbers, f = (val) => val) {
+      let result = 0;
+      each(numbers, num => result += f(num));
+      return result;
     }
+
     var numbers = [1, 2, 3, 4];
     sumBy(numbers, square); // => 30
     sumBy(numbers, cube); // => 100
@@ -84,6 +119,14 @@ In order to complete these exercises, open [repl.it](https://repl.it/), choose J
     numbers (just the plain sum)?
 
 4.  Write a function `productBy` that works like `sumBy`, but for **products**.
+
+```js
+  const productBy = (numbers, f) => {
+    let result = 1;
+    each(numbers, (num) => result *= f(num));
+    return result;
+  }
+```
 
 #### Refactoring
 
@@ -99,13 +142,24 @@ In order to complete these exercises, open [repl.it](https://repl.it/), choose J
 
     ```js
     function doubleAll(numbers) {
-      // ...
+      const result = new Array();
+      each(numbers, (num) => result.push(num * 2));
+      return result;
     }
     doubleAll([1, 3, 10, 4, 7]); // => [2, 6, 20, 8, 14]
     ```
 
 2.  Write a function `halveAll` that takes an array of numbers as a parameter and
     returns an array of all of those numbers *halved* (divided by two).
+```js
+const halveAll = (numbers) => {
+  const result = [];
+  each(numbers, (num) => result.push(num / 2));
+  return result;
+};
+```
+
+halveAll([1, 3, 10, 4, 7]);
 
 3.  Write a function `uppercaseAll` that takes an array of **strings** as a
     parameter, and returns an array of all of those strings, but transformed to

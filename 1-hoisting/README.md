@@ -28,17 +28,13 @@ Rewrite the following *function declarations* using a *function expression*:
 
  ```js
  // 1.
- function cube(x) {
-   return x * x * x;
- }
+ const cube = x => x * x * x;
 
  // 2.
- function fullName(first, last) {
-   return first + " " + last;
- }
+ const fullName = (first, last) => first + " " + last;
 
  // 3.
- function power(base, exp) {
+ const power = (base, exp) => {
    if (exp === 0) {
      return 1;
    }
@@ -46,7 +42,7 @@ Rewrite the following *function declarations* using a *function expression*:
  }
 
  // 4.
- function sumCubes(numbers) {
+ const sumCubes = numbers => {
    var total = 0;
    for (var i = 0; i < numbers.length; i++) {
      total = total + cube(numbers[i]);
@@ -64,7 +60,7 @@ Type out your best answers to the following questions:
   console.log(message);
 
   var message = 'Hi there!';
-  ```
+  //Message outputs undefined because any binding assigned with the var keyword is hoisted to the top of its scope with the value of undefined
 
 2. Why does JavaScript throw an error instead of logging `undefined` in the following code?
 
@@ -72,7 +68,7 @@ Type out your best answers to the following questions:
     console.log(message);
 
     let message = 'Hi there!';
-    ```
+    //any binding that is assigned with the keyword let or const will result in an error because the binding is not initialized
 
 3. Explain precisely what happens when the following code is executed.
 
@@ -82,7 +78,7 @@ Type out your best answers to the following questions:
     var showMessage = function(){
       return 'Hi there!';
     };
-    ```
+    //When the function is invoked above it will result in not a function because the anonymouse function is assigned in a function expression format
 
 4. Why does JavaScript *not* throw any errors when the following code is executed?
 
@@ -92,7 +88,7 @@ Type out your best answers to the following questions:
   function showMessage(){
     return 'Hi there!';
   }
-  ```
+  //function declaration is hoisted to the its scope
 
 #### Code Restructuring
 
@@ -100,19 +96,20 @@ Restructure the following instances of code to work correctly:
 
  ```js
  // 1.
- for(var i = 0; i < values.length; i++){
+ const values = [10, 20, 30];
+ for(let i = 0; i < values.length; i++){
    console.log(values[i]);
  }
 
- var values = [10, 20, 30];
  ```
  ```js
  // 2.
- console.log(welcome('Charlie', 'Munger'));
-
- function welcome(first, last) {
+ let lastLogin = '1/1/1970';
+ 
+ const welcome = (first, last) => {
    return `Welcome, ${first} ${last}! You last logged in on ${lastLogin}.`
  };
 
- var lastLogin = '1/1/1970';
+ console.log(welcome('Charlie', 'Munger'));
+
  ```
